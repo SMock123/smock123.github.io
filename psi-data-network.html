@@ -37,10 +37,9 @@
         </div>
         <div class="col-2">
           <div>Click on a node to see more info!</div>
-          <hr width="98%" color="white"></hr>
-          <div id="moreinfo">
-
-          </div>
+          <hr width="98%" color="white">
+          <div id="nodelabel"></div>
+          <div id="moreinfo"></div>
 
         </div>
       </div>
@@ -228,6 +227,7 @@
         //console.log("clicked on ", params);
         //console.log("data is ", data);
         var id = params.nodes[0];
+        $('#nodelabel').text(nodes.get(id).label + ":");
         $('#moreinfo').text(nodes.get(id).text);
       });
 
