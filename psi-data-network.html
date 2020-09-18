@@ -14,6 +14,7 @@
       body {
         background-color: rgba(3,51,127,1);
         color: #fff;
+        font-family: "Cairo", Arial, sans-serif;
       }
       #mynetwork {
         background-color: white;
@@ -100,47 +101,47 @@
       // create an array with nodes
       var nodes = new vis.DataSet([
         // core nodes
-        { id: 1, label: "Electricity", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass , otherThing: "blahblahblah" },
-        { id: 2, label: "Water", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass },
-        { id: 3, label: "Gas", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass },
+        { id: 1, label: "Electricity", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass , text: "Electricity stuff. Zap!" },
+        { id: 2, label: "Water", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Water is neat." },
+        { id: 3, label: "Gas", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Beans, beans the magical fruit." },
 
-        { id: 4, label: "Weather", color: midNodeColor, font: midNodeFont, mass: midNodeMass },
-        { id: 5, label: "Location", color: midNodeColor, font: midNodeFont, mass: midNodeMass },
-        { id: 6, label: "Price & Emissions", color: midNodeColor, font: midNodeFont, mass: midNodeMass },
+        { id: 4, label: "Weather", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "How's that heat, huh?" },
+        { id: 5, label: "Location", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Location. Location. Location." },
+        { id: 6, label: "Price & Emissions", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "That's the price of admission." },
 
-        { id: 7, label: "Indoor Temperature" },
-        { id: 8, label: "Ercot ISO" },
-        { id: 9, label: "New York ISO" },
-        { id: 10, label: "Midcontinent ISO" },
-        { id: 11, label: "New England ISO" },
+        { id: 7, label: "Indoor Temperature", text: "Is it hot in here or is it just AC?" },
+        { id: 8, label: "Ercot ISO", text: "Witty Ercot ISO comment here." },
+        { id: 9, label: "New York ISO", text: "New York, New York." },
+        { id: 10, label: "Midcontinent ISO", text: "IDK something about the midcontinent." },
+        { id: 11, label: "New England ISO", text: "Chowder?" },
 
         // Energy loads, flexible and inflexible
-        { id: 12, label: "Flexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass },
-        { id: 13, label: "Inflexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass  },
+        { id: 12, label: "Flexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Yoga loads." },
+        { id: 13, label: "Inflexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Non-yoga loads." },
 
 
-        { id: 14, label: "Generation", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass },
-        { id: 15, label: "Solar" },
+        { id: 14, label: "Generation", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Gen-X? Gen-Z?" },
+        { id: 15, label: "Solar", text: "Sun shine bright." },
 
-        { id: 16, label: "Energy", color: midNodeColor, font: midNodeFont, mass: midNodeMass },
-        { id: 17, label: "Power Quality", color: midNodeColor, font: midNodeFont, mass: midNodeMass },
+        { id: 16, label: "Energy", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Energy is neat." },
+        { id: 17, label: "Power Quality", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "More power (quality)!" },
 
-        { id: 18, label: "Apparent" },
-        { id: 19, label: "Total Harmonic Distortion" },
-        { id: 20, label: "Phase Angle" },
+        { id: 18, label: "Apparent", text: "Apparently." },
+        { id: 19, label: "Total Harmonic Distortion", text: "Totally, dude." },
+        { id: 20, label: "Phase Angle", text: "Phasers set to 'Angle!'" },
 
         // Flexible Loads
-          { id: 21, label: "HVAC" },
-          { id: 22, label: "Electric Vehicle" },
-          { id: 23, label: "Pool Pump" },
-          { id: 24, label: "Battery Storage" },
+          { id: 21, label: "HVAC", text: "HVAC. Nothing funny here." },
+          { id: 22, label: "Electric Vehicle", text: "Gimme a Tesla." },
+          { id: 23, label: "Pool Pump", text: "Not my...NM." },
+          { id: 24, label: "Battery Storage", text: "AAA or AA?" },
 
         // inflexible loads
-          { id: 25, label: "Water Heater" },
-          { id: 26, label: "Refrigerator" },
-          { id: 27, label: "Sump Pump" },
-          { id: 28, label: "Television" },
-          { id: 29, label: "Accessories" },
+          { id: 25, label: "Water Heater", text: "We're in hot water." },
+          { id: 26, label: "Refrigerator", text: "Close the door!" },
+          { id: 27, label: "Sump Pump", text: "Yummy." },
+          { id: 28, label: "Television", text: "Gotta get a bigger one." },
+          { id: 29, label: "Accessories", text: "Propane and ... " },
       ]);
 
       // create an array with edges
@@ -194,6 +195,8 @@
 
       ]);
 
+      //var info = {
+
       // create a network
       var container = document.getElementById("mynetwork");
       var data = {
@@ -204,10 +207,14 @@
         autoResize: true,
         height: '100%',
         width: '100%',
-        gravity: 5,
         nodes: {
           shape: "box",
           font: leafNodeFont,
+          mass: 1,
+          shadow: true,
+        },
+        edges: {
+          // shadow: true,
         }
       };
       var network = new vis.Network(container, data, options);
@@ -220,7 +227,8 @@
       network.on("selectNode", function(params) {
         //console.log("clicked on ", params);
         //console.log("data is ", data);
-        $('#moreinfo').text("Clicked on node id #" + params.nodes[0]);
+        var id = params.nodes[0];
+        $('#moreinfo').text(nodes.get(id).text);
       });
 
       $( window ).resize(function() {
