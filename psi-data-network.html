@@ -97,52 +97,43 @@
        };
 
 
-      // create an array with nodes
-      var nodes = new vis.DataSet([
+    // create an array with nodes
+    var nodes = new vis.DataSet([
         // core nodes
-        { id: 1, label: "Electricity", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass , text: "Electricity stuff. Zap!" },
-        { id: 2, label: "Water", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Water is neat." },
-        { id: 3, label: "Gas", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Beans, beans the magical fruit." },
-
-        { id: 4, label: "Weather", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "How's that heat, huh?" },
-        { id: 5, label: "Location", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Location. Location. Location." },
-        { id: 6, label: "Price & Emissions", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "That's the price of admission." },
-
-        { id: 7, label: "Indoor Temperature", text: "Is it hot in here or is it just AC?" },
-        { id: 8, label: "Ercot ISO", text: "Witty Ercot ISO comment here." },
-        { id: 9, label: "New York ISO", text: "New York, New York." },
-        { id: 10, label: "Midcontinent ISO", text: "IDK something about the midcontinent." },
-        { id: 11, label: "New England ISO", text: "Chowder?" },
-
+        { id: 1, label: "Electricity", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass , text: "Electricity Data, including residential data, Independent System Operator (ISO) data and related information." },
+        { id: 2, label: "Water", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Whole home water data collected from 2015 to 2019" },
+        { id: 3, label: "Gas", color: coreNodeColor, font: coreNodeFont, mass: coreNodeMass, text: "Whole home Natural Gas data. Data is accumulator based instead of interval, meaning each reported value is the total gas consumed lifetime, with the amount used from the last report added to the total." },
+        { id: 4, label: "Weather", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Locational based weather data from third party sources." },
+        { id: 5, label: "Location", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Geographical location, anonymized by zipcode." },
+        { id: 6, label: "Price & Emissions", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Information from the ISO on wholesale electricity prices and carbon/gas emissions where available." },
+        { id: 7, label: "Indoor Temperature", text: "Indoor residential temperature data, for data IDs with installed DS18B20 single wire temperature sensors. Typical accuracy +/- 1F" },
+        { id: 8, label: "Ercot ISO", text: "Data for the grid operator of the State of Texas." },
+        { id: 9, label: "New York ISO", text: "Data for the grid operator in New York State" },
+        { id: 10, label: "Midcontinent ISO", text: "Wholesale price and emissions data for the Mid-continent ISO, with covers portions of Canida, Michigan, Indian,Ohio and several other states." },
+        { id: 11, label: "New England ISO", text: "Price and emissions data for New England States" },
         // Energy loads, flexible and inflexible
-        { id: 12, label: "Flexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Yoga loads." },
-        { id: 13, label: "Inflexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Non-yoga loads." },
-
-
-        { id: 14, label: "Generation", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Gen-X? Gen-Z?" },
-        { id: 15, label: "Solar", text: "Sun shine bright." },
-
-        { id: 16, label: "Energy", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Energy is neat." },
-        { id: 17, label: "Power Quality", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "More power (quality)!" },
-
-        { id: 18, label: "Apparent", text: "Apparently." },
-        { id: 19, label: "Total Harmonic Distortion", text: "Totally, dude." },
-        { id: 20, label: "Phase Angle", text: "Phasers set to 'Angle!'" },
-        { id: 30, label: "Real Power", text: "Get real, man!" },
-
+        { id: 12, label: "Flexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Consumption data for loads that are generally considered to be flexible and dispatchable, at least for short periods of time." },
+        { id: 13, label: "Inflexible Loads", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Electricity consumption information for loads that are generally considered to be inflexible, they will be operated and aren’t available for curtailment or pre-cooling use due to occupant comfort or food safety." },
+        { id: 14, label: "Generation", color: loadNodeColor, font: loadNodeFont, mass: loadNodeMass, text: "Generation source, typically solar." },
+        { id: 15, label: "Solar", text: "Solar production data, note production values are positive." },
+        { id: 16, label: "Energy", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "All types of real power energy information for flexible and inflexible loads as well as generation." },
+        { id: 17, label: "Power Quality", color: midNodeColor, font: midNodeFont, mass: midNodeMass, text: "Power quality metrics such as phase angle, distortion. Historically these have not been an issue for residential properties, but with the advent of solar they have become more critical. " },
+        { id: 18, label: "Apparent", text: "Apparent power, the product of RMS voltage and current." },
+        { id: 19, label: "Total Harmonic Distortion", text: "Harmonic distortion for the current in each circuit. Historically this has been relatively low but with the advent of switching power supplies some appliances and lighting may be over 100% THD indicating high harmonic content." },
+        { id: 20, label: "Phase Angle", text: "Phase angle between voltage and current" },
+        { id: 30, label: "Real Power", text: "Real power, billable watts." },
         // Flexible Loads
-          { id: 21, label: "HVAC", text: "HVAC. Nothing funny here." },
-          { id: 22, label: "Electric Vehicle", text: "Gimme a Tesla." },
-          { id: 23, label: "Pool Pump", text: "Not my...NM." },
-          { id: 24, label: "Battery Storage", text: "AAA or AA?" },
-
+         { id: 21, label: "HVAC", text: "Air conditioning systems, these are typically AIR1 (compressor) and Furnace1 (air handler)" },
+         { id: 22, label: "Electric Vehicle", text: "Level 1 or Level 2 Plug in Electric Vehicle." },
+         { id: 23, label: "Pool Pump", text: "Circulation Pump" },
+         { id: 24, label: "Battery Storage", text: "Residential energy storage systems. " },
         // inflexible loads
-          { id: 25, label: "Water Heater", text: "We're in hot water." },
-          { id: 26, label: "Refrigerator", text: "Close the door!" },
-          { id: 27, label: "Sump Pump", text: "Yummy." },
-          { id: 28, label: "Television", text: "Gotta get a bigger one." },
-          { id: 29, label: "Accessories", text: "Propane and ... " },
-      ]);
+         { id: 25, label: "Water Heater", text: "Electric water heater." },
+         { id: 26, label: "Refrigerator", text: "Primary kitchen refrigerator." },
+         { id: 27, label: "Sump Pump", text: "Waste water pump for homes where the sewer line is above the grade of the home. " },
+         { id: 28, label: "Television", text: "Where known and on a dedicated circuit." },
+         { id: 29, label: "Accessories", text: "Other unique plug loads" },
+     ]);
 
       // create an array with edges
       var edges = new vis.DataSet([
